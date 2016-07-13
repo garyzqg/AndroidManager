@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             private static final String TAG = "MainActivity";
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //当页面滚动时
+                //当页面滚动时调用
                 Log.d(TAG, "onPageScrolled: " + position + "positionOffset" +positionOffset + "positionOffsetPixels" + positionOffsetPixels);
             }
 
