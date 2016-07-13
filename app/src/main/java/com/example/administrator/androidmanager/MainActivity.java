@@ -34,6 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: ");
+
     }
 
     @Override
