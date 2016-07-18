@@ -6,14 +6,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/android_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
-
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".telephone.MainActivity">
         </activity>
         <activity android:name=".ViewPagerActivity">
             <intent-filter>
@@ -21,6 +20,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".telephone.TellistActivity">
+        </activity>
+        <activity android:name=".HomeActivity">
         </activity>
     </application>
 

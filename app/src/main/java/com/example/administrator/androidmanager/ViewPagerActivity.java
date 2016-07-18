@@ -18,18 +18,21 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
     ArrayList<View> mArrayList;
     int[] pics = {R.mipmap.adware_style_applist,R.mipmap.adware_style_banner,R.mipmap.adware_style_creditswall};
     Button mBtnSkip;
+    SharedPreferences mPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //生成shared Preferences
+        //生成shared Preferences文件用于保存用户是否浏览了viewPager
         //MODE_PRIVATE只读
-        SharedPreferences preferences = getSharedPreferences(SP_CONFIG, MODE_PRIVATE);
-        //从sp文件中读取key,是否为true,判断是否第一次运行
-        boolean isFirstRun = preferences.getBoolean(IS_FIRST_RUN,true);
+        mPreferences = getSharedPreferences(SP_CONFIG, MODE_PRIVATE);
+        //从sp文件中读取key,是否为true
+        boolean isFirstRun = mPreferences.getBoolean(IS_FIRST_RUN,true);
 
-        //如果不是第一次运行
+        //根据isFirstRun的值判断是否为第一次运行,如果不是第一次运行则直接开启intent跳转到帧动画欢迎界面
         if (!isFirstRun){
-            startActivity(new Intent(this,SplashActivity.class));
+            startActivity(new Intent(ViewPagerActivity.this,SplashActivity.class));
+            //非第一次运行跳转后也得finish()!!!!!!!!!!!!!!!!!!!!!
+            finish();
         }else{
             setContentView(R.layout.activity_view_pager);
             //将图片存在集合中,传给适配器
@@ -44,6 +47,9 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
             //动画实现
             mViewPager.setPageTransformer(true,new ZoomOutPageTransformer() );
+            //跳转按键
+            mBtnSkip = (Button) findViewById(R.id.btn_skip);
+            mBtnSkip.setOnClickListener(this);
 
             //第三张图时才显示跳转
             mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -51,10 +57,9 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
                 }
-
                 @Override
                 public void onPageSelected(int position) {
-                    if(position == 2){
+                    if(position >= pics.length - 1){
                         mBtnSkip.setVisibility(View.VISIBLE);
                     }else{
                         mBtnSkip.setVisibility(View.INVISIBLE);
@@ -66,8 +71,8 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
                 }
             });
-            mBtnSkip = (Button) findViewById(R.id.btn_skip);
-            mBtnSkip.setOnClickListener(this);
+
+
         }
 
 
@@ -77,15 +82,12 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        //对shared Preferences进行修改
-        SharedPreferences preferences = getSharedPreferences(SP_CONFIG, MODE_PRIVATE);
         //让其从只读状态变成可编辑状态
-        SharedPreferences.Editor editor =preferences.edit();
+        SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(IS_FIRST_RUN,false);
         editor.apply();
         startActivity(new Intent(this,SplashActivity.class));
         finish();
-
     }
 
     //动画(类)

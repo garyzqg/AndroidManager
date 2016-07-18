@@ -17,9 +17,12 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ImageView iv = (ImageView) findViewById(R.id.tv_splash);
+        //imageView加载帧动画
         iv.setBackgroundResource(R.drawable.draw);
+        //开启帧动画
         AnimationDrawable anim = (AnimationDrawable) iv.getBackground();
         anim.start();
+        //开启一个线程,动画展示3秒后跳转
         new Thread(this).start();
         mHandler = new MyHandler();
     }
@@ -28,7 +31,7 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.what == 0){
-                Intent in = new Intent(SplashActivity.this,MainActivity.class);
+                Intent in = new Intent(SplashActivity.this,HomeActivity.class);
                 startActivity(in);
                 finish();
             }
@@ -46,39 +49,4 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: ");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart: ");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
-    }
 }
