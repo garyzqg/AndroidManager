@@ -3,14 +3,15 @@ package com.example.administrator.androidmanager.telephone;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.administrator.androidmanager.JavaBean.TelclassInfo;
-import com.example.administrator.androidmanager.JavaBean.TelnumberInfo;
+import com.example.administrator.androidmanager.javabean.TelclassInfo;
+import com.example.administrator.androidmanager.javabean.TelnumberInfo;
 
 import java.io.File;
 import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/7/14.
+ * 读取数据库(主列表+子列表N个)内容,保存在相对应java bean中
  */
 public class DBReader {
     /*
@@ -19,6 +20,9 @@ public class DBReader {
     public static ArrayList<TelclassInfo> readTeldbClasslist(File file){
 
         //SQLiteDatabase里的openOrCreateDatabase方法返回一个SQLiteDatabase对象
+        /*
+        注意:利用SQLiteOpenHelper新建的数据库,必须用getWritable/readableDatebase获取一个SQLiteDatabase对象
+         */
         SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(file,null);
         //创建ArrayList集合存储 封装了数据库每一条新信息的 TelclassInfo对象
         ArrayList<TelclassInfo> classlistInfos = new ArrayList<>();

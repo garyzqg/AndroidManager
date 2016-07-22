@@ -3,15 +3,20 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f2eeee">
+    android:background="#f1d2d2">
     <ImageView
+        android:layout_marginTop="10dp"
         android:id="@+id/iv_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        />
     <TextView
         android:id="@+id/tv_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

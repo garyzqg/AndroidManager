@@ -23,7 +23,7 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //生成shared Preferences文件用于保存用户是否浏览了viewPager
-        //MODE_PRIVATE只读
+        //MODE_PRIVATE 私有模式
         mPreferences = getSharedPreferences(SP_CONFIG, MODE_PRIVATE);
         //从sp文件中读取key,是否为true
         boolean isFirstRun = mPreferences.getBoolean(IS_FIRST_RUN,true);
@@ -35,8 +35,8 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
             finish();
         }else{
             setContentView(R.layout.activity_view_pager);
-            //将图片存在集合中,传给适配器
             mViewPager = (ViewPager) findViewById(R.id.vp_slidingPager);
+            //将图片存在集合中,传给适配器
             mArrayList = new ArrayList<>();
             for (int i = 0; i < pics.length; i++) {
                 ImageView iv = new ImageView(this);
@@ -45,13 +45,13 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
             }
             mViewPager.setAdapter(new MyPaperAdapter(mArrayList));
 
-            //动画实现
+            //动画实现(网上直接复制)
             mViewPager.setPageTransformer(true,new ZoomOutPageTransformer() );
             //跳转按键
             mBtnSkip = (Button) findViewById(R.id.btn_skip);
             mBtnSkip.setOnClickListener(this);
 
-            //第三张图时才显示跳转
+            //第三张图时才显示跳转按键
             mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -90,7 +90,9 @@ public class ViewPagerActivity extends AppCompatActivity implements View.OnClick
         finish();
     }
 
-    //动画(类)
+    /*
+    (类)动画实现
+     */
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;

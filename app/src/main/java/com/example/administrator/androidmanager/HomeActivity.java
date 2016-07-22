@@ -10,8 +10,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.administrator.androidmanager.telephone.HomeAdapter;
-import com.example.administrator.androidmanager.telephone.MainActivity;
+import com.example.administrator.androidmanager.mobiletest.MobileTestActivity;
+import com.example.administrator.androidmanager.softwaremanager.PackageActivity;
+import com.example.administrator.androidmanager.telephone.TelActivity;
 
 public class HomeActivity extends AppCompatActivity{
 
@@ -27,7 +28,7 @@ public class HomeActivity extends AppCompatActivity{
         mGridView = (GridView) findViewById(R.id.gv_home);
         mGridView.setAdapter(new HomeAdapter(HomeActivity.this,draws,texts));
 
-        //菜单
+        //toolbar + 菜单
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_home);
         toolbar.inflateMenu(R.menu.menu_home);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -39,13 +40,22 @@ public class HomeActivity extends AppCompatActivity{
         });
 
 
-        //对GridView设置点击事件
+        //对GridView设置点击事件:1:软件管理;2:手机检测;3:通讯大全
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
                 switch (position){
+                    case 1:
+                        intent = new Intent(HomeActivity.this,PackageActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        intent = new Intent(HomeActivity.this,MobileTestActivity.class);
+                        startActivity(intent);
+                        break;
                     case 3:
-                        Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+                        intent = new Intent(HomeActivity.this,TelActivity.class);
                         startActivity(intent);
                         break;
                     default:

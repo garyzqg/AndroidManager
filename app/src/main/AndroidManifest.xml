@@ -3,6 +3,7 @@
           package="com.example.administrator.androidmanager">
 
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
         </activity>
-        <activity android:name=".telephone.MainActivity">
+        <activity android:name=".telephone.TelActivity">
         </activity>
         <activity android:name=".ViewPagerActivity">
             <intent-filter>
@@ -25,6 +26,11 @@
         </activity>
         <activity android:name=".HomeActivity">
         </activity>
+        <activity android:name=".softwaremanager.PackageActivity">
+        </activity>
+        <activity android:name=".mobiletest.MobileTestActivity">
+        </activity>
+        <receiver android:name=".mobiletest.MobileTestActivity$BatteryBroadCast"/>
     </application>
 
 </manifest>

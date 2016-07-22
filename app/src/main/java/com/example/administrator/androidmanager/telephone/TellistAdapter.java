@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.administrator.androidmanager.JavaBean.TelnumberInfo;
+import com.example.administrator.androidmanager.javabean.TelnumberInfo;
 import com.example.administrator.androidmanager.R;
 
 import java.util.ArrayList;
@@ -43,16 +43,23 @@ public class TellistAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
+        ViewHolder viewHolder;
         if(convertView == null){
-            view = View.inflate(mContext, R.layout.num_item,null);
+            convertView = View.inflate(mContext, R.layout.num_item,null);
+            viewHolder = new ViewHolder();
+            viewHolder.mTextView = (TextView) convertView.findViewById(R.id.tv_item_numname);
+            viewHolder.mTextView2 = (TextView) convertView.findViewById(R.id.tv_item_number);
+            convertView.setTag(viewHolder);
+
         }else{
-            view = convertView;
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        TextView tv = (TextView) view.findViewById(R.id.tv_item_numname);
-        tv.setText(mArrayList.get(position).name);
-        TextView tv1 =(TextView) view.findViewById(R.id.tv_item_number);
-        tv1.setText(mArrayList.get(position).number);
-        return view;
+        viewHolder.mTextView.setText(mArrayList.get(position).name);
+        viewHolder.mTextView2.setText(mArrayList.get(position).number);
+        return convertView;
+    }
+    public static class ViewHolder{
+        public TextView mTextView;
+        public TextView mTextView2;
     }
 }

@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.administrator.androidmanager.JavaBean.TelnumberInfo;
+import com.example.administrator.androidmanager.javabean.TelnumberInfo;
 import com.example.administrator.androidmanager.R;
 
 import java.util.ArrayList;
@@ -26,17 +26,17 @@ public class TellistActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tellist);
         ListView listView = (ListView) findViewById(R.id.lv_tellist);
-        //获取Intent传递过来的id0
+        //获取Intent传递过来的id
         mId = getIntent().getStringExtra("idx");
-        mTelnumberInfos = DBReader.readTeldbTable(mId, MainActivity.mFile);
+        //调用DBReader里的方法,读取数据库文件中子列表n的数据,得到一个集合
+        mTelnumberInfos = DBReader.readTeldbTable(mId, TelActivity.mFile);
         mAdapter = new TellistAdapter(this, mTelnumberInfos);
         listView.setAdapter(mAdapter);
         //设置listview的点击事件
         listView.setOnItemClickListener(this);
 
+        //toolbar + 菜单
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_tel);
-
-        //菜单
         toolbar.inflateMenu(R.menu.menu_tellist);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

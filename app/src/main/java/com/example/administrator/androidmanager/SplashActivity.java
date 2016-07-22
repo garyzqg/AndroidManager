@@ -26,6 +26,9 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
         new Thread(this).start();
         mHandler = new MyHandler();
     }
+    /*
+    Handler
+     */
     class MyHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {

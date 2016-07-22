@@ -1,4 +1,4 @@
-package com.example.administrator.androidmanager.JavaBean;
+package com.example.administrator.androidmanager.javabean;
 
 /**
  * Created by Administrator on 2016/7/15.
